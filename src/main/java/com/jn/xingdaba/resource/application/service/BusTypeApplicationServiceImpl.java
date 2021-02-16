@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -22,8 +21,7 @@ public class BusTypeApplicationServiceImpl implements BusTypeApplicationService 
     @Override
     public Page<BusTypeResponseDto> findAll(BusTypeQueryRequestData requestData) {
         log.info("find pageable bus type request data: {}", requestData);
-        Pageable pageable = PageRequest.of(requestData.getPageNo(), requestData.getPageSize(), Sort.by("createTime").descending());
-
-        return domainService.findAll(pageable).map(BusTypeResponseDto::fromModel);
+        Pageable pageable = PageRequest.of(requestData.getPageNo(), requestData.getPageSize());
+        return domainService.findAll(requestData, pageable).map(BusTypeResponseDto::fromModel);
     }
 }

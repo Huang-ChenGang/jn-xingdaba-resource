@@ -7,4 +7,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public final class BusTypeQueryRequestData extends QueryReq {
+
+    private String busTypeName;
+
+    private String brand;
 }
