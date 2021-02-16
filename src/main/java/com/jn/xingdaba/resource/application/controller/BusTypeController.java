@@ -1,5 +1,6 @@
 package com.jn.xingdaba.resource.application.controller;
 
+import com.jn.core.api.JnPageResponse;
 import com.jn.core.api.ServerResponse;
 import com.jn.xingdaba.resource.api.BusTypeQueryRequestData;
 import com.jn.xingdaba.resource.api.BusTypeResponseData;
@@ -21,7 +22,10 @@ public class BusTypeController {
     }
 
     @GetMapping("/pageable")
-    public ServerResponse<Page<BusTypeResponseData>> findAll(BusTypeQueryRequestData requestData) {
-        return ServerResponse.success(service.findAll(requestData).map(BusTypeResponseData::fromDto));
+    public ServerResponse<JnPageResponse<BusTypeResponseData>> findAll(BusTypeQueryRequestData requestData) {
+        Page<BusTypeResponseData> pageResult = service.findAll(requestData).map(BusTypeResponseData::fromDto);
+        log.info("find all bus type page result: {}", pageResult);
+
+        return ServerResponse.success(JnPageResponse.of(pageResult.getContent(), pageResult.getTotalElements()));
     }
 }
