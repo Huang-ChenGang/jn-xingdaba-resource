@@ -24,4 +24,9 @@ public class BusTypeDomainServiceImpl implements BusTypeDomainService {
         Specification<BusType> specification = BusTypeSpecification.fromRequestData(requestData);
         return repository.findAll(specification, pageable);
     }
+
+    @Override
+    public String save(BusType model) {
+        return repository.save(model).getId();
+    }
 }

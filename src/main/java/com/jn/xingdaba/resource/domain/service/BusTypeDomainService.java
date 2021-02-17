@@ -7,4 +7,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface BusTypeDomainService {
     Page<BusType> findAll(BusTypeQueryRequestData requestData, Pageable pageable);
+
+    String save(BusType model);
 }
