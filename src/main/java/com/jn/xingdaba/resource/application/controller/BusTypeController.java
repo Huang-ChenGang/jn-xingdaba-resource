@@ -8,12 +8,13 @@ import com.jn.xingdaba.resource.api.BusTypeSaveRequestData;
 import com.jn.xingdaba.resource.application.service.BusTypeApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotBlank;
 
 @Slf4j
+@Validated
 @RestController
 @RequestMapping("/bus-types")
 public class BusTypeController {
@@ -34,5 +35,11 @@ public class BusTypeController {
     public ServerResponse<String> save(BusTypeSaveRequestData requestData) {
         log.info("save bus type request data: {}", requestData);
         return ServerResponse.success(service.save(BusTypeSaveRequestData.toDto(requestData)));
+    }
+
+    @DeleteMapping("/{ids}")
+    public ServerResponse<Void> delete(@PathVariable @NotBlank String ids) {
+        service.delete(ids);
+        return ServerResponse.success();
     }
 }

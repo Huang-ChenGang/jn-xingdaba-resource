@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Slf4j
 @Service
 public class BusTypeApplicationServiceImpl implements BusTypeApplicationService {
@@ -30,5 +32,11 @@ public class BusTypeApplicationServiceImpl implements BusTypeApplicationService 
     public String save(BusTypeSaveRequestDto requestDto) {
         log.info("save bus type request dto: {}", requestDto);
         return domainService.save(BusTypeSaveRequestDto.toModel(requestDto));
+    }
+
+    @Override
+    public void delete(String ids) {
+        log.info("delete bus type for: {}", ids);
+        domainService.delete(Arrays.asList(ids.split(",")));
     }
 }

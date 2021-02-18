@@ -9,4 +9,6 @@ public interface BusTypeApplicationService {
     Page<BusTypeResponseDto> findAll(BusTypeQueryRequestData requestData);
 
     String save(BusTypeSaveRequestDto requestDto);
+
+    void delete(String ids);
 }

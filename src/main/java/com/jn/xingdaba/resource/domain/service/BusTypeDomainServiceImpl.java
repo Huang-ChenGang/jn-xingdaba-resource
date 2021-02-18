@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class BusTypeDomainServiceImpl implements BusTypeDomainService {
@@ -28,5 +30,10 @@ public class BusTypeDomainServiceImpl implements BusTypeDomainService {
     @Override
     public String save(BusType model) {
         return repository.save(model).getId();
+    }
+
+    @Override
+    public void delete(List<String> ids) {
+        repository.deleteBusTypesByIdIn(ids);
     }
 }
