@@ -1,5 +1,6 @@
 package com.jn.xingdaba.resource.domain.service;
 
+import com.jn.core.builder.KeyBuilder;
 import com.jn.xingdaba.resource.api.BusTypeQueryRequestData;
 import com.jn.xingdaba.resource.domain.model.BusType;
 import com.jn.xingdaba.resource.domain.model.query.BusTypeSpecification;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -16,9 +18,11 @@ import java.util.List;
 @Service
 public class BusTypeDomainServiceImpl implements BusTypeDomainService {
     private final BusTypeRepository repository;
+    private final KeyBuilder keyBuilder;
 
-    public BusTypeDomainServiceImpl(BusTypeRepository repository) {
+    public BusTypeDomainServiceImpl(BusTypeRepository repository, KeyBuilder keyBuilder) {
         this.repository = repository;
+        this.keyBuilder = keyBuilder;
     }
 
     @Override
@@ -29,6 +33,9 @@ public class BusTypeDomainServiceImpl implements BusTypeDomainService {
 
     @Override
     public String save(BusType model) {
+        if (StringUtils.isEmpty(model.getId())) {
+            model.setId(keyBuilder.getUniqueKey());
+        }
         return repository.save(model).getId();
     }
 

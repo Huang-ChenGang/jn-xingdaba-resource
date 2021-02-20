@@ -32,7 +32,7 @@ public class BusTypeController {
     }
 
     @PostMapping
-    public ServerResponse<String> save(BusTypeSaveRequestData requestData) {
+    public ServerResponse<String> save(@RequestBody @Validated BusTypeSaveRequestData requestData) {
         log.info("save bus type request data: {}", requestData);
         return ServerResponse.success(service.save(BusTypeSaveRequestData.toDto(requestData)));
     }
