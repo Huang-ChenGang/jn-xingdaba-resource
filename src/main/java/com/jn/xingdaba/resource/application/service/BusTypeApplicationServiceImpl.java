@@ -35,8 +35,8 @@ public class BusTypeApplicationServiceImpl implements BusTypeApplicationService 
     }
 
     @Override
-    public void delete(String ids) {
-        log.info("delete bus type for: {}", ids);
-        domainService.delete(Arrays.asList(ids.split(",")));
+    public void deleteOrRestore(String ids) {
+        log.info("delete or restore bus type for: {}", ids);
+        domainService.deleteOrRestore(Arrays.asList(ids.split(",")));
     }
 }

@@ -12,5 +12,5 @@ public interface BusTypeDomainService {
 
     String save(BusType model);
 
-    void delete(List<String> ids);
+    void deleteOrRestore(List<String> ids);
 }

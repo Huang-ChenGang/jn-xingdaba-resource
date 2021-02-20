@@ -10,5 +10,5 @@ public interface BusTypeApplicationService {
 
     String save(BusTypeSaveRequestDto requestDto);
 
-    void delete(String ids);
+    void deleteOrRestore(String ids);
 }

@@ -44,9 +44,9 @@ public class BusTypeDomainServiceImpl implements BusTypeDomainService {
     }
 
     @Override
-    public void delete(List<String> ids) {
+    public void deleteOrRestore(List<String> ids) {
         repository.saveAll(repository.findAllByIdIn(ids).stream()
-                .peek(m -> m.setIsDelete("1"))
+                .peek(m -> m.setIsDelete("1".equals(m.getIsDelete()) ? "0" : "1"))
                 .collect(Collectors.toList()));
     }
 }

@@ -37,9 +37,9 @@ public class BusTypeController {
         return ServerResponse.success(service.save(BusTypeSaveRequestData.toDto(requestData)));
     }
 
-    @DeleteMapping("/{ids}")
-    public ServerResponse<Void> delete(@PathVariable @NotBlank String ids) {
-        service.delete(ids);
+    @PostMapping("/{ids}")
+    public ServerResponse<Void> deleteOrRestore(@PathVariable @NotBlank String ids) {
+        service.deleteOrRestore(ids);
         return ServerResponse.success();
     }
 }
