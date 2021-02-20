@@ -1,12 +1,20 @@
 package com.jn.xingdaba.resource.api;
 
-import com.jn.core.api.QueryReq;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+
 @Data
-public final class BusTypeQueryRequestData extends QueryReq {
+public final class BusTypeQueryRequestData {
+
+    @PositiveOrZero
+    private Integer pageNo;
+
+    @Positive
+    private Integer pageSize;
+
+    private String isDelete;
 
     private String busTypeName;
 
