@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -36,11 +37,16 @@ public class BusTypeDomainServiceImpl implements BusTypeDomainService {
         if (StringUtils.isEmpty(model.getId())) {
             model.setId(keyBuilder.getUniqueKey());
         }
+        if (StringUtils.isEmpty(model.getIsDelete())) {
+            model.setIsDelete("0");
+        }
         return repository.save(model).getId();
     }
 
     @Override
     public void delete(List<String> ids) {
-        repository.deleteBusTypesByIdIn(ids);
+        repository.saveAll(repository.findAllByIdIn(ids).stream()
+                .peek(m -> m.setIsDelete("1"))
+                .collect(Collectors.toList()));
     }
 }

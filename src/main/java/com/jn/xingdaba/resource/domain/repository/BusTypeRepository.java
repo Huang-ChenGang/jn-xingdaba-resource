@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface BusTypeRepository extends JpaRepository<BusType, String>, JpaSpecificationExecutor<BusType> {
     void deleteBusTypesByIdIn(List<String> ids);
+
+    List<BusType> findAllByIdIn(List<String> ids);
 }
