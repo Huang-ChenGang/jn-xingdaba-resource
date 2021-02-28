@@ -12,6 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Validated
@@ -29,6 +31,13 @@ public class BusTypeController {
         Page<BusTypeResponseData> pageResult = service.findAll(requestData).map(BusTypeResponseData::fromDto);
         log.info("find all bus type page result: {}", pageResult);
         return ServerResponse.success(JnPageResponse.of(pageResult.getContent(), pageResult.getTotalElements()));
+    }
+
+    @GetMapping
+    public ServerResponse<List<BusTypeResponseData>> findAll() {
+        return ServerResponse.success(service.findAll().stream()
+                .map(BusTypeResponseData::fromDto)
+                .collect(Collectors.toList()));
     }
 
     @PostMapping

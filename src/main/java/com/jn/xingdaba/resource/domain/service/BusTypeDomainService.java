@@ -13,4 +13,6 @@ public interface BusTypeDomainService {
     String save(BusType model);
 
     void deleteOrRestore(List<String> ids);
+
+    List<BusType> findAll();
 }

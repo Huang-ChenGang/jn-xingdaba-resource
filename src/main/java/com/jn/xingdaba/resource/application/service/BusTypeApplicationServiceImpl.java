@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -25,7 +27,8 @@ public class BusTypeApplicationServiceImpl implements BusTypeApplicationService 
     public Page<BusTypeResponseDto> findAll(BusTypeQueryRequestData requestData) {
         log.info("find pageable bus type request data: {}", requestData);
         Pageable pageable = PageRequest.of(requestData.getPageNo(), requestData.getPageSize());
-        return domainService.findAll(requestData, pageable).map(BusTypeResponseDto::fromModel);
+        return domainService.findAll(requestData, pageable)
+                .map(BusTypeResponseDto::fromModel);
     }
 
     @Override
@@ -38,5 +41,12 @@ public class BusTypeApplicationServiceImpl implements BusTypeApplicationService 
     public void deleteOrRestore(String ids) {
         log.info("delete or restore bus type for: {}", ids);
         domainService.deleteOrRestore(Arrays.asList(ids.split(",")));
+    }
+
+    @Override
+    public List<BusTypeResponseDto> findAll() {
+        return domainService.findAll().stream()
+                .map(BusTypeResponseDto::fromModel)
+                .collect(Collectors.toList());
     }
 }

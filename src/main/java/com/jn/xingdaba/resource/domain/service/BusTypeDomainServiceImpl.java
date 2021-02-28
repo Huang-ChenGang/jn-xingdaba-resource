@@ -49,4 +49,9 @@ public class BusTypeDomainServiceImpl implements BusTypeDomainService {
                 .peek(m -> m.setIsDelete("1".equals(m.getIsDelete()) ? "0" : "1"))
                 .collect(Collectors.toList()));
     }
+
+    @Override
+    public List<BusType> findAll() {
+        return repository.findAll();
+    }
 }
