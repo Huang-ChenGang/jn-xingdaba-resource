@@ -52,6 +52,6 @@ public class BusTypeDomainServiceImpl implements BusTypeDomainService {
 
     @Override
     public List<BusType> findAll() {
-        return repository.findAll();
+        return repository.findAllByIsDeleteOrderBySeatNumAsc("0");
     }
 }
