@@ -12,4 +12,8 @@ public final class DiscountBusRequestData {
 
     @Positive
     private Integer pageSize;
+
+    private String shelfState;
+
+    private String isDelete;
 }

@@ -22,7 +22,7 @@ public class DiscountBusServiceImpl implements DiscountBusService {
     public Page<DiscountBusDto> findAll(DiscountBusRequestData requestData) {
         log.info("find pageable discount bus for: {}", requestData);
         Pageable pageable = PageRequest.of(requestData.getPageNo(), requestData.getPageSize());
-        return domainService.findAll(pageable)
+        return domainService.findAll(requestData, pageable)
                 .map(DiscountBusDto::fromModel);
     }
 }
