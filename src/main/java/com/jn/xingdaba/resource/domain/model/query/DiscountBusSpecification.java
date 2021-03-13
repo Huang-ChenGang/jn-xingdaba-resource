@@ -32,6 +32,7 @@ public class DiscountBusSpecification {
             Path<String> driverPhone = root.get("driverPhone");
             Path<String> parkAddr = root.get("parkAddr");
             Path<String> motorcade = root.get("motorcade");
+            Path<String> district = root.get("district");
             Path<String> shelfState = root.get("shelfState");
             Path<String> isDelete = root.get("isDelete");
 
@@ -71,6 +72,10 @@ public class DiscountBusSpecification {
 
             if (StringUtils.hasText(requestData.getMotorcade())) {
                 finalConditions = cb.and(finalConditions, cb.like(motorcade, "%" + requestData.getMotorcade() + "%"));
+            }
+
+            if (StringUtils.hasText(requestData.getDistrict())) {
+                finalConditions = cb.and(finalConditions, cb.equal(district, requestData.getDistrict()));
             }
 
             if (StringUtils.hasText(requestData.getShelfState())) {

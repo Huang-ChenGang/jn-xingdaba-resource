@@ -45,6 +45,8 @@ public final class DiscountBusRequestData {
 
     private String motorcade;
 
+    private String district;
+
     private String shelfState;
 
     private String isDelete;
