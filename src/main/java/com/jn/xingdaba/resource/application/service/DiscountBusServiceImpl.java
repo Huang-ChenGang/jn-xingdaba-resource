@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Slf4j
 @Service
 public class DiscountBusServiceImpl implements DiscountBusService {
@@ -24,5 +26,23 @@ public class DiscountBusServiceImpl implements DiscountBusService {
         Pageable pageable = PageRequest.of(requestData.getPageNo(), requestData.getPageSize());
         return domainService.findAll(requestData, pageable)
                 .map(DiscountBusDto::fromModel);
+    }
+
+    @Override
+    public String save(DiscountBusDto dto) {
+        log.info("save discount bus for request dto: {}", dto);
+        return domainService.save(DiscountBusDto.toModel(dto));
+    }
+
+    @Override
+    public void deleteOrRestore(String ids) {
+        log.info("delete or restore discount bus for: {}", ids);
+        domainService.deleteOrRestore(Arrays.asList(ids.split(",")));
+    }
+
+    @Override
+    public void shelfOnOrOff(String ids) {
+        log.info("shelf on or off discount bus for: {}", ids);
+        domainService.shelfOnOrOff(Arrays.asList(ids.split(",")));
     }
 }

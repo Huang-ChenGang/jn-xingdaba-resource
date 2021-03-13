@@ -6,4 +6,10 @@ import org.springframework.data.domain.Page;
 
 public interface DiscountBusService {
     Page<DiscountBusDto> findAll(DiscountBusRequestData requestData);
+
+    String save(DiscountBusDto dto);
+
+    void deleteOrRestore(String ids);
+
+    void shelfOnOrOff(String ids);
 }

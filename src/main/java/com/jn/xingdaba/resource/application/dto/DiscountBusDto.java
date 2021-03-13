@@ -42,4 +42,10 @@ public final class DiscountBusDto {
         BeanUtils.copyProperties(model, dto);
         return dto;
     }
+
+    public static DiscountBus toModel(DiscountBusDto dto) {
+        DiscountBus model = new DiscountBus();
+        BeanUtils.copyProperties(dto, model);
+        return model;
+    }
 }
