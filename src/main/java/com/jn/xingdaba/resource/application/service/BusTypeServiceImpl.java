@@ -9,6 +9,7 @@ import com.jn.xingdaba.resource.domain.model.BusType;
 import com.jn.xingdaba.resource.domain.service.BusPriceDomainService;
 import com.jn.xingdaba.resource.domain.service.BusTypeDomainService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -70,7 +71,7 @@ public class BusTypeServiceImpl implements BusTypeService {
         for (BusType busType : busTypeList) {
             if (busType.getSeatNum() >= passengerNumber) {
                 BusTypeRecommendResponseData recommendBusType = new BusTypeRecommendResponseData();
-                recommendBusType.setBusTypeId(busType.getId());
+                BeanUtils.copyProperties(busType, recommendBusType);
                 recommendBusType.setBusCount(1);
                 recommendBusTypeList.add(recommendBusType);
                 return recommendBusTypeList;
@@ -100,7 +101,7 @@ public class BusTypeServiceImpl implements BusTypeService {
             for (BusType busType : busTypeList) {
                 if (busType.getSeatNum().equals(entry.getKey())) {
                     BusTypeRecommendResponseData recommendBusType = new BusTypeRecommendResponseData();
-                    recommendBusType.setBusTypeId(busType.getId());
+                    BeanUtils.copyProperties(busType, recommendBusType);
                     recommendBusType.setBusCount(entry.getValue());
                     recommendBusTypeList.add(recommendBusType);
                 }
