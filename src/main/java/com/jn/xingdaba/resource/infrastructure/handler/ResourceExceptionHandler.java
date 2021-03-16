@@ -1,6 +1,8 @@
 package com.jn.xingdaba.resource.infrastructure.handler;
 
 import com.jn.core.api.ServerResponse;
+import com.jn.core.exception.JNException;
+import com.jn.xingdaba.resource.infrastructure.exception.ResourceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,6 +34,15 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex,
                 ServerResponse.error(BAD_REQUEST, "请求参数不能为空"),
                 headers, status, request);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler({
+            ResourceException.class
+    })
+    public ServerResponse<Void> handleLogicError(JNException exception) {
+        log.error("resource system logic error", exception);
+        return ServerResponse.error(exception.getJNError());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
