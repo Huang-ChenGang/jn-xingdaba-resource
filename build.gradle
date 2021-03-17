@@ -10,7 +10,7 @@ ext {
 
 allprojects {
     group = 'com.jn'
-    version = '2021.1.0-SNAPSHOT'
+    version = '2021.3.0-SNAPSHOT'
     sourceCompatibility = '11'
 }
 
@@ -32,6 +32,13 @@ subprojects {
     dependencyManagement {
         imports {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+
+        dependencies {
+            dependency 'org.projectlombok:lombok:1.18.16'
+            dependency 'mysql:mysql-connector-java:8.0.21'
+
+            dependency 'com.jn:jn-core-common:2021.3.1-SNAPSHOT'
         }
     }
 
