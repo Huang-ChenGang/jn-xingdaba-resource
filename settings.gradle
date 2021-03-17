@@ -1,1 +1,4 @@
 rootProject.name = 'jn-xingdaba-resource'
+include 'xingdaba-resource-api'
+include 'xingdaba-resource-application'
+

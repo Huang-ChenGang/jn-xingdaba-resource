@@ -3,7 +3,6 @@ package com.jn.xingdaba.resource.domain.model.query;
 import com.jn.xingdaba.resource.api.DiscountBusRequestData;
 import com.jn.xingdaba.resource.domain.model.DiscountBus;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.jni.Local;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
