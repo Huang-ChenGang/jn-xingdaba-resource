@@ -18,6 +18,13 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
 
+    ext {
+        publishNexusReleases = "http://118.25.184.76:8081/nexus/content/repositories/oobusReleases/"
+        publishNexusSnapshots = "http://118.25.184.76:8081/nexus/content/repositories/oobusSnapshots/"
+        publishNexusUser = NexusUser
+        publishNexusPwd = NexusPwd
+    }
+
     repositories {
         mavenLocal()
         maven {
