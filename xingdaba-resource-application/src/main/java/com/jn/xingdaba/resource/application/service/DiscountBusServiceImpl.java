@@ -45,4 +45,9 @@ public class DiscountBusServiceImpl implements DiscountBusService {
         log.info("shelf on or off discount bus for: {}", ids);
         domainService.shelfOnOrOff(Arrays.asList(ids.split(",")));
     }
+
+    @Override
+    public DiscountBusDto findById(String id) {
+        return DiscountBusDto.fromModel(domainService.findById(id));
+    }
 }

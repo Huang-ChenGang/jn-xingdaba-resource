@@ -46,4 +46,9 @@ public class DiscountBusController {
         service.shelfOnOrOff(ids);
         return ServerResponse.success();
     }
+
+    @GetMapping("/{id}")
+    public ServerResponse<DiscountBusResponseData> findById(@PathVariable @NotBlank String id) {
+        return ServerResponse.success(DiscountBusResponseData.fromDto(service.findById(id)));
+    }
 }

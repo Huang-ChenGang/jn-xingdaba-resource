@@ -15,4 +15,6 @@ public interface DiscountBusDomainService {
     void deleteOrRestore(List<String> ids);
 
     void shelfOnOrOff(List<String> ids);
+
+    DiscountBus findById(String id);
 }

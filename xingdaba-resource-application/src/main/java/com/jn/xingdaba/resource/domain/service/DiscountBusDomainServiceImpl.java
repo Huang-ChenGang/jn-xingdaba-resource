@@ -5,6 +5,7 @@ import com.jn.xingdaba.resource.api.DiscountBusRequestData;
 import com.jn.xingdaba.resource.domain.model.DiscountBus;
 import com.jn.xingdaba.resource.domain.model.query.DiscountBusSpecification;
 import com.jn.xingdaba.resource.domain.repository.DiscountBusRepository;
+import com.jn.xingdaba.resource.infrastructure.exception.BusTypeNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -60,5 +61,10 @@ public class DiscountBusDomainServiceImpl implements DiscountBusDomainService {
         repository.saveAll(repository.findAllByIdIn(ids).stream()
                 .peek(m -> m.setShelfState("on".equals(m.getShelfState()) ? "off" : "on"))
                 .collect(Collectors.toList()));
+    }
+
+    @Override
+    public DiscountBus findById(String id) {
+        return repository.findById(id).orElseThrow(BusTypeNotFoundException::new);
     }
 }

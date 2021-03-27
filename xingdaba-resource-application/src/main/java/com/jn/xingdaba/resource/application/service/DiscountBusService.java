@@ -12,4 +12,6 @@ public interface DiscountBusService {
     void deleteOrRestore(String ids);
 
     void shelfOnOrOff(String ids);
+
+    DiscountBusDto findById(String id);
 }
