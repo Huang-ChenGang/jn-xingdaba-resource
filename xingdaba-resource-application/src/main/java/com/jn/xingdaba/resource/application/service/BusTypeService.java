@@ -18,4 +18,6 @@ public interface BusTypeService {
     List<BusTypeResponseDto> findAll();
 
     List<BusTypeRecommendResponseData> recommendBusType(Integer passengerNumber);
+
+    BusTypeResponseDto findById(String id);
 }

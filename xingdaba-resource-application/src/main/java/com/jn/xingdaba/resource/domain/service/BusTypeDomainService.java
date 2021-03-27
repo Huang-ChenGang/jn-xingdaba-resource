@@ -15,4 +15,6 @@ public interface BusTypeDomainService {
     void deleteOrRestore(List<String> ids);
 
     List<BusType> findAll();
+
+    BusType findById(String id);
 }

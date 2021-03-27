@@ -6,6 +6,7 @@ import com.jn.xingdaba.resource.api.BusTypeQueryRequestData;
 import com.jn.xingdaba.resource.api.BusTypeRecommendResponseData;
 import com.jn.xingdaba.resource.api.BusTypeResponseData;
 import com.jn.xingdaba.resource.api.BusTypeSaveRequestData;
+import com.jn.xingdaba.resource.application.dto.BusTypeResponseDto;
 import com.jn.xingdaba.resource.application.service.BusTypeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,7 @@ public class BusTypeController {
 
     @GetMapping("/pageable")
     public ServerResponse<JnPageResponse<BusTypeResponseData>> findAll(BusTypeQueryRequestData requestData) {
-        Page<BusTypeResponseData> pageResult = service.findAll(requestData).map(BusTypeResponseData::fromDto);
+        Page<BusTypeResponseData> pageResult = service.findAll(requestData).map(BusTypeResponseDto::toResponseData);
         log.info("find all bus type page result: {}", pageResult);
         return ServerResponse.success(JnPageResponse.of(pageResult));
     }
@@ -38,7 +39,7 @@ public class BusTypeController {
     @GetMapping
     public ServerResponse<List<BusTypeResponseData>> findAll() {
         return ServerResponse.success(service.findAll().stream()
-                .map(BusTypeResponseData::fromDto)
+                .map(BusTypeResponseDto::toResponseData)
                 .collect(Collectors.toList()));
     }
 
@@ -57,5 +58,10 @@ public class BusTypeController {
     @GetMapping("/recommended/{passengerNumber}")
     public ServerResponse<List<BusTypeRecommendResponseData>> recommendBusType(@PathVariable @NotNull Integer passengerNumber) {
         return ServerResponse.success(service.recommendBusType(passengerNumber));
+    }
+
+    @GetMapping("/{id}")
+    public ServerResponse<BusTypeResponseData> findById(@PathVariable @NotBlank String id) {
+        return ServerResponse.success(BusTypeResponseDto.toResponseData(service.findById(id)));
     }
 }

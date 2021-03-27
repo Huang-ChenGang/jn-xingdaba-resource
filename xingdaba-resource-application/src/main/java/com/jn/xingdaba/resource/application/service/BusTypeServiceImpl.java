@@ -111,6 +111,12 @@ public class BusTypeServiceImpl implements BusTypeService {
         return recommendBusTypeList;
     }
 
+    @Override
+    public BusTypeResponseDto findById(String id) {
+        log.info("find bus type by id: {}", id);
+        return BusTypeResponseDto.fromModel(domainService.findById(id));
+    }
+
     private Map<String, String> get(Map<Integer, BigDecimal> busTypeMap, int personNum) {
         Map<String, String> retMap = getMinPrice(busTypeMap, personNum);
 

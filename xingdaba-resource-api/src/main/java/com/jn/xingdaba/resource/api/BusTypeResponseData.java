@@ -1,8 +1,6 @@
 package com.jn.xingdaba.resource.api;
 
-import com.jn.xingdaba.resource.application.dto.BusTypeResponseDto;
 import lombok.Data;
-import org.springframework.beans.BeanUtils;
 
 @Data
 public final class BusTypeResponseData {
@@ -24,9 +22,4 @@ public final class BusTypeResponseData {
 
     private String isDelete;
 
-    public static BusTypeResponseData fromDto(BusTypeResponseDto dto) {
-        BusTypeResponseData responseData = new BusTypeResponseData();
-        BeanUtils.copyProperties(dto, responseData);
-        return responseData;
-    }
 }

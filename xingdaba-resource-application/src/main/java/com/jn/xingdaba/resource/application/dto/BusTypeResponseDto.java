@@ -1,5 +1,6 @@
 package com.jn.xingdaba.resource.application.dto;
 
+import com.jn.xingdaba.resource.api.BusTypeResponseData;
 import com.jn.xingdaba.resource.domain.model.BusType;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
@@ -28,5 +29,11 @@ public final class BusTypeResponseDto {
         BusTypeResponseDto dto = new BusTypeResponseDto();
         BeanUtils.copyProperties(model, dto);
         return dto;
+    }
+
+    public static BusTypeResponseData toResponseData(BusTypeResponseDto dto) {
+        BusTypeResponseData responseData = new BusTypeResponseData();
+        BeanUtils.copyProperties(dto, responseData);
+        return responseData;
     }
 }
