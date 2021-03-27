@@ -112,9 +112,11 @@ public class BusTypeServiceImpl implements BusTypeService {
     }
 
     @Override
-    public BusTypeResponseDto findById(String id) {
-        log.info("find bus type by id: {}", id);
-        return BusTypeResponseDto.fromModel(domainService.findById(id));
+    public List<BusTypeResponseDto> findByIds(String ids) {
+        log.info("find bus type list by ids: {}", ids);
+        return domainService.findAllByIdIn(Arrays.asList(ids.split(",")))
+                .stream().map(BusTypeResponseDto::fromModel)
+                .collect(Collectors.toList());
     }
 
     private Map<String, String> get(Map<Integer, BigDecimal> busTypeMap, int personNum) {

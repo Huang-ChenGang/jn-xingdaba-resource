@@ -60,8 +60,10 @@ public class BusTypeController {
         return ServerResponse.success(service.recommendBusType(passengerNumber));
     }
 
-    @GetMapping("/{id}")
-    public ServerResponse<BusTypeResponseData> findById(@PathVariable @NotBlank String id) {
-        return ServerResponse.success(BusTypeResponseDto.toResponseData(service.findById(id)));
+    @GetMapping("/{ids}")
+    public ServerResponse<List<BusTypeResponseData>> findById(@PathVariable @NotBlank String ids) {
+        return ServerResponse.success(service.findByIds(ids).stream()
+                .map(BusTypeResponseDto::toResponseData)
+                .collect(Collectors.toList()));
     }
 }

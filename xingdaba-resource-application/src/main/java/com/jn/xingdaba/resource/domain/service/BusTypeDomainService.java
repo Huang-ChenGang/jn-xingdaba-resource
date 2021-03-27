@@ -16,5 +16,5 @@ public interface BusTypeDomainService {
 
     List<BusType> findAll();
 
-    BusType findById(String id);
+    List<BusType> findAllByIdIn(List<String> ids);
 }
