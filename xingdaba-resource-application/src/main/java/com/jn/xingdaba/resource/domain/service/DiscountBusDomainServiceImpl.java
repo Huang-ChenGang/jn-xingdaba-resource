@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -44,6 +45,12 @@ public class DiscountBusDomainServiceImpl implements DiscountBusDomainService {
         }
         if (StringUtils.isEmpty(model.getIsDelete())) {
             model.setIsDelete("0");
+        }
+
+        Optional<DiscountBus> oldValue = repository.findById(model.getId());
+        if (oldValue.isPresent()) {
+            model.setCreateTime(oldValue.get().getCreateTime());
+            model.setCreateBy(oldValue.get().getCreateBy());
         }
 
         return repository.save(model).getId();
