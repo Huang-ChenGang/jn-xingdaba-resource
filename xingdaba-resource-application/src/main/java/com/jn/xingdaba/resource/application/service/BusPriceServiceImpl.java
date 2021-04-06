@@ -1,8 +1,12 @@
 package com.jn.xingdaba.resource.application.service;
 
+import com.jn.xingdaba.resource.api.BusPriceRequestData;
 import com.jn.xingdaba.resource.application.dto.BusPriceDto;
 import com.jn.xingdaba.resource.domain.service.BusPriceDomainService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -18,5 +22,13 @@ public class BusPriceServiceImpl implements BusPriceService {
     public BusPriceDto findByBusTypeId(String busTypeId) {
         log.info("find bus price by busTypeId: {}", busTypeId);
         return BusPriceDto.fromModel(domainService.findByBusTypeId(busTypeId));
+    }
+
+    @Override
+    public Page<BusPriceDto> findAll(BusPriceRequestData requestData) {
+        log.info("find pageable bus price request data: {}", requestData);
+        Pageable pageable = PageRequest.of(requestData.getPageNo(), requestData.getPageSize());
+        return domainService.findAll(requestData, pageable)
+                .map(BusPriceDto::fromModel);
     }
 }

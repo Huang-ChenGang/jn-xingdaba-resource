@@ -1,10 +1,13 @@
 package com.jn.xingdaba.resource.application.controller;
 
+import com.jn.core.api.JnPageResponse;
 import com.jn.core.api.ServerResponse;
+import com.jn.xingdaba.resource.api.BusPriceRequestData;
 import com.jn.xingdaba.resource.api.BusPriceResponseData;
 import com.jn.xingdaba.resource.application.dto.BusPriceDto;
 import com.jn.xingdaba.resource.application.service.BusPriceService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,5 +30,12 @@ public class BusPriceController {
     @GetMapping("/bus-type/{busTypeId}")
     public ServerResponse<BusPriceResponseData> findByBusTypeId(@PathVariable @NotBlank String busTypeId) {
         return ServerResponse.success(BusPriceDto.toResponseData(service.findByBusTypeId(busTypeId)));
+    }
+
+    @GetMapping("/pageable")
+    public ServerResponse<JnPageResponse<BusPriceResponseData>> findAll(BusPriceRequestData requestData) {
+        Page<BusPriceResponseData> pageResult = service.findAll(requestData).map(BusPriceDto::toResponseData);
+        log.info("find all bus price page result: {}", pageResult);
+        return ServerResponse.success(JnPageResponse.of(pageResult));
     }
 }
