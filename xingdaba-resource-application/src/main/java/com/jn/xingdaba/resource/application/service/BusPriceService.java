@@ -10,4 +10,6 @@ public interface BusPriceService {
     Page<BusPriceDto> findAll(BusPriceRequestData requestData);
 
     String save(BusPriceDto requestDto);
+
+    void deleteOrRestore(String ids);
 }

@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Slf4j
 @Service
 public class BusPriceServiceImpl implements BusPriceService {
@@ -36,5 +38,11 @@ public class BusPriceServiceImpl implements BusPriceService {
     public String save(BusPriceDto requestDto) {
         log.info("save bus price request dto: {}", requestDto);
         return domainService.save(BusPriceDto.toModel(requestDto));
+    }
+
+    @Override
+    public void deleteOrRestore(String ids) {
+        log.info("delete or restore bus price for: {}", ids);
+        domainService.deleteOrRestore(Arrays.asList(ids.split(",")));
     }
 }

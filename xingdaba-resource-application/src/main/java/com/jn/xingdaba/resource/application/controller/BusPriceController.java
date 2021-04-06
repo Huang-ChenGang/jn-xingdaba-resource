@@ -42,4 +42,10 @@ public class BusPriceController {
         log.info("save bus price request data: {}", requestData);
         return ServerResponse.success(service.save(BusPriceSaveRequestData.toDto(requestData)));
     }
+
+    @PostMapping("/{ids}")
+    public ServerResponse<Void> deleteOrRestore(@PathVariable @NotBlank String ids) {
+        service.deleteOrRestore(ids);
+        return ServerResponse.success();
+    }
 }
