@@ -8,4 +8,6 @@ public interface BusPriceService {
     BusPriceDto findByBusTypeId(String busTypeId);
 
     Page<BusPriceDto> findAll(BusPriceRequestData requestData);
+
+    String save(BusPriceDto requestDto);
 }

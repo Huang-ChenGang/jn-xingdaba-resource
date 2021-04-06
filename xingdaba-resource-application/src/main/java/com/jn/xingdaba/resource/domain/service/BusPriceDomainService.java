@@ -9,4 +9,6 @@ public interface BusPriceDomainService {
     BusPrice findByBusTypeId(String busTypeId);
 
     Page<BusPrice> findAll(BusPriceRequestData requestData, Pageable pageable);
+
+    String save(BusPrice model);
 }

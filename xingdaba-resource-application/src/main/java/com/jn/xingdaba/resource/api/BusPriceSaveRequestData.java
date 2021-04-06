@@ -1,18 +1,21 @@
-package com.jn.xingdaba.resource.application.dto;
+package com.jn.xingdaba.resource.api;
 
-import com.jn.xingdaba.resource.api.BusPriceResponseData;
-import com.jn.xingdaba.resource.domain.model.BusPrice;
+import com.jn.xingdaba.resource.application.dto.BusPriceDto;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 
 @Data
-public final class BusPriceDto {
+public final class BusPriceSaveRequestData {
+
     private String id;
 
+    @NotBlank(message = "车型ID不能为空")
     private String busTypeId;
 
+    @NotBlank(message = "车型名称不能为空")
     private String busTypeName;
 
     private BigDecimal cost;
@@ -45,21 +48,9 @@ public final class BusPriceDto {
 
     private String isDelete;
 
-    public static BusPriceDto fromModel(BusPrice model) {
+    public static BusPriceDto toDto(BusPriceSaveRequestData requestData) {
         BusPriceDto dto = new BusPriceDto();
-        BeanUtils.copyProperties(model, dto);
+        BeanUtils.copyProperties(requestData, dto);
         return dto;
-    }
-
-    public static BusPrice toModel(BusPriceDto dto) {
-        BusPrice model = new BusPrice();
-        BeanUtils.copyProperties(dto, model);
-        return model;
-    }
-
-    public static BusPriceResponseData toResponseData(BusPriceDto dto) {
-        BusPriceResponseData responseData = new BusPriceResponseData();
-        BeanUtils.copyProperties(dto, responseData);
-        return responseData;
     }
 }

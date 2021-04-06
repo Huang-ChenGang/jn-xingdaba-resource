@@ -4,15 +4,13 @@ import com.jn.core.api.JnPageResponse;
 import com.jn.core.api.ServerResponse;
 import com.jn.xingdaba.resource.api.BusPriceRequestData;
 import com.jn.xingdaba.resource.api.BusPriceResponseData;
+import com.jn.xingdaba.resource.api.BusPriceSaveRequestData;
 import com.jn.xingdaba.resource.application.dto.BusPriceDto;
 import com.jn.xingdaba.resource.application.service.BusPriceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
 
@@ -37,5 +35,11 @@ public class BusPriceController {
         Page<BusPriceResponseData> pageResult = service.findAll(requestData).map(BusPriceDto::toResponseData);
         log.info("find all bus price page result: {}", pageResult);
         return ServerResponse.success(JnPageResponse.of(pageResult));
+    }
+
+    @PostMapping
+    public ServerResponse<String> save(@RequestBody @Validated BusPriceSaveRequestData requestData) {
+        log.info("save bus price request data: {}", requestData);
+        return ServerResponse.success(service.save(BusPriceSaveRequestData.toDto(requestData)));
     }
 }

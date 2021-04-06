@@ -31,4 +31,10 @@ public class BusPriceServiceImpl implements BusPriceService {
         return domainService.findAll(requestData, pageable)
                 .map(BusPriceDto::fromModel);
     }
+
+    @Override
+    public String save(BusPriceDto requestDto) {
+        log.info("save bus price request dto: {}", requestDto);
+        return domainService.save(BusPriceDto.toModel(requestDto));
+    }
 }
