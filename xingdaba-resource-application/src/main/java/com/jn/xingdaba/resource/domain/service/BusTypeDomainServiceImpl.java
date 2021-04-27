@@ -5,6 +5,7 @@ import com.jn.xingdaba.resource.api.BusTypeQueryRequestData;
 import com.jn.xingdaba.resource.domain.model.BusType;
 import com.jn.xingdaba.resource.domain.model.query.BusTypeSpecification;
 import com.jn.xingdaba.resource.domain.repository.BusTypeRepository;
+import com.jn.xingdaba.resource.infrastructure.exception.BusTypeNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -66,5 +67,10 @@ public class BusTypeDomainServiceImpl implements BusTypeDomainService {
     @Override
     public List<BusType> findAllByIdIn(List<String> ids) {
         return repository.findAllByIdIn(ids);
+    }
+
+    @Override
+    public BusType findById(String id) {
+        return repository.findById(id).orElseThrow(BusTypeNotFoundException::new);
     }
 }

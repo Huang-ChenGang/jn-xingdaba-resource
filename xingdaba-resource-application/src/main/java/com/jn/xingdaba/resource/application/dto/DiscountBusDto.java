@@ -18,6 +18,7 @@ public final class DiscountBusDto {
 
     private String busTypeId;
     private String busTypeName;
+    private Integer seatNum;
 
     private String busNumber;
     private String driverName;

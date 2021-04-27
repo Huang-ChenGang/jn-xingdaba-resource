@@ -2,6 +2,7 @@ package com.jn.xingdaba.resource.application.service;
 
 import com.jn.xingdaba.resource.api.DiscountBusRequestData;
 import com.jn.xingdaba.resource.application.dto.DiscountBusDto;
+import com.jn.xingdaba.resource.domain.service.BusTypeDomainService;
 import com.jn.xingdaba.resource.domain.service.DiscountBusDomainService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -15,9 +16,12 @@ import java.util.Arrays;
 @Service
 public class DiscountBusServiceImpl implements DiscountBusService {
     private final DiscountBusDomainService domainService;
+    private final BusTypeDomainService busTypeDomainService;
 
-    public DiscountBusServiceImpl(DiscountBusDomainService domainService) {
+    public DiscountBusServiceImpl(DiscountBusDomainService domainService,
+                                  BusTypeDomainService busTypeDomainService) {
         this.domainService = domainService;
+        this.busTypeDomainService = busTypeDomainService;
     }
 
     @Override
@@ -48,6 +52,8 @@ public class DiscountBusServiceImpl implements DiscountBusService {
 
     @Override
     public DiscountBusDto findById(String id) {
-        return DiscountBusDto.fromModel(domainService.findById(id));
+        DiscountBusDto dto = DiscountBusDto.fromModel(domainService.findById(id));
+        dto.setSeatNum(busTypeDomainService.findById(dto.getBusTypeId()).getSeatNum());
+        return dto;
     }
 }
